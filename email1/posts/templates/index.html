@@ -6,13 +6,29 @@
 <h1>Welcome contact to email marketing</h1>
 <form method="POST" action="/blog/">
 {% csrf_token %}
-{% for f in form %}
+{% if form.title.errors %}
+    {% for err_title in form.title.errors %}
+        <p>{{err_title | escape}}</p>
+    {% endfor %}
+{% endif %}
+
+{% if form.content.errors %}
+{% for err_content in form.content.errors %}
+<p>{{err_content | escape}}</p>
+{% endfor %}
+{% endif %}
+
+
+
 <div class="form-row">
+    {% for f in form %}
     <div class="form-group col-md-12">
+        {{f.label_tag}}
         {{f}}
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
+
     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
 </form><br>
 <div>
