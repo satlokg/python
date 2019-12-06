@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from pages.models import Contact
 # Create your views here.
 
@@ -13,15 +13,35 @@ def about(request):
 
 
 def contact(request):
+    if(request.method == 'GET' and request.GET.get('method') == 'delete' and request.GET.get('id')):
+             rec = Contact.objects.filter(id=request.GET.get('id'))
+             rec.delete()
+
+    if(request.method == 'GET' and request.GET.get('method') == 'edit' and request.GET.get('id')):
+             rec1 = Contact.objects.filter(id=request.GET.get('id')).get()
+             return render(request, 'edit.html', {'title': 'Contact Page Title', 'row': rec1})
+
     if(request.method == 'POST'):
-        data = Contact(
+        if(request.GET.get('method') == 'edit'):
+            rec = Contact.objects.filter(id=request.GET.get('id'))
+            rec.update(
+                name=request.POST['name'],
+                email=request.POST['email'],
+                address=request.POST['address'],
+                city=request.POST['city'],
+                zipcode=request.POST['zipcode']
+            )
+            return HttpResponseRedirect('/contact')
+       
+        else:
+            data = Contact(
             name = request.POST['name'],
             email = request.POST['email'],
             address = request.POST['address'],
             city = request.POST['city'],
             zipcode = request.POST['zipcode']
-        )
-        data.save()
+            )
+            data.save()
 
     cnt = Contact.objects.all()
     return render(request, 'contact.html', {'title': 'Contact Page Title', 'rows': cnt})

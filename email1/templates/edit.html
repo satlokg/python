@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block page_title %} {{title}} {% endblock %}
+{% block content %}
+<h1>Welcome contact to email marketing</h1>
+<form method="POST" action="/contact/?id={{row.id}}&method=edit">
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            {% csrf_token %}
+        </div>
+
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Name</label>
+            <input type="text" name="name" class="form-control" id="inputEmail4" value="{{row.name}}">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Email</label>
+            <input type="email" name="email" class="form-control" id="inputEmail4" value="{{row.email}}">
+        </div>
+
+    </div>
+
+
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            <label for="inputAddress2">Address </label>
+            <input type="text" name="address" class="form-control" id="inputAddress2"
+                placeholder="Apartment, studio, or floor" value="{{row.address}}">
+        </div>
+        <div class="form-group col-md-5">
+            <label for="inputCity">City</label>
+            <input type="text" name="city" class="form-control" id="inputCity" value="{{row.city}}">
+        </div>
+
+        <div class="form-group col-md-2">
+            <label for="inputZip">Zip</label>
+            <input type="text" name="zipcode" class="form-control" id="inputZip" value="{{row.zipcode}}">
+        </div>
+    </div>
+
+    <button type="submit" name="submit" class="btn btn-primary">Update Record</button>
+</form><br>
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+
+{% block page_title %} {{title}} {% endblock %}
+{% block content %}
+{% load static %}
+<h1>Welcome contact to email marketing</h1>
+<form method="POST" action="/blog/">
+{% csrf_token %}
+{% for f in form %}
+<div class="form-row">
+    <div class="form-group col-md-12">
+        {{f}}
+    </div>
+</div>
+{% endfor %}
+    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+</form><br>
+<div>
+    {% for row in rows %}
+        <h1>{{row.title}}</h1>
+        <p>{{row.content}}</p>
+                <small>{{row.created_at}}</small>
+    {% endfor %}
+</div>
+{% endblock %}

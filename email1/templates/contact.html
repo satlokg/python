@@ -41,17 +41,18 @@
         </div>
     </div>
    
-    <button type="submit" name="submit" class="btn btn-primary">Sign in</button>
-</form>
+    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+</form><br>
 <div class="row">
    <table class="table table-responsive text-white">
        <thead>
            <tr>
-               <th>Nmae</th>
+               <th>Name</th>
                <th>Email</th>
                <th>Address</th>
                <th>City</th>
                 <th>Zip</th>
+                <th colspan="2">Action</th>
            </tr>
        </thead>
        <tbody>
@@ -62,6 +63,9 @@
                 <td>{{row.address}}</td>
                 <td>{{row.city}}</td>
                 <td>{{row.zipcode}}</td>
+                <td><a href="/contact?id={{row.id}}&method=edit" class="btn btn-sm btn-success">Edit</a></td>
+                 <td> <a href="/contact?id={{row.id}}&method=delete" class="btn btn-sm btn-danger">Delete</a>
+                </td>
             </tr>
            {% endfor %}
        </tbody>

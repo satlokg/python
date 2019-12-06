@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+
+{% block page_title %} {{title}} {% endblock %}
+{% block content %}
+{% load static %}
+<h1>Welcome contact to email marketing</h1>
+<form method="POST" action="/contact/">
+    {% csrf_token %}
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            {{form}}
+        </div>
+    </div>
+    <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+</form><br>
+
+{% endblock %}
