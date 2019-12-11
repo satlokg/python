@@ -40,6 +40,7 @@ Content: <p>{{err_content | escape}}</p>
         <h1>{{row.title}}</h1>
         <p>{{row.content}}</p>
                 <small>{{row.created_at}}</small>
+                <small>{{row.user.username}}</small>
     {% endfor %}
 </div>
 {% endblock %}
