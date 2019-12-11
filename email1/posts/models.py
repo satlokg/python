@@ -38,6 +38,7 @@ class Posts(models.Model):
     ]
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    category = models.ManyToManyField(Category, default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
  
@@ -48,7 +49,7 @@ class Posts(models.Model):
 class PostsForm(forms.ModelForm):
     class Meta:
         model = Posts
-        fields = ['title', 'content', 'user']
+        fields = ['title', 'content', 'user','category']
     def clean(self):
         fields = self.cleaned_data
         keys = list(fields.keys())

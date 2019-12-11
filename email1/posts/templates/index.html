@@ -39,8 +39,22 @@ Content: <p>{{err_content | escape}}</p>
     {% for row in rows %}
         <h1>{{row.title}}</h1>
         <p>{{row.content}}</p>
-                <small>{{row.created_at}}</small>
-                <small>{{row.user.username}}</small>
+                <small>{{row.created_at}}</small><br>
+                <small>{{row.user.username}}</small><br>
+                <small>{{row.category.all|join:' / '}}</small><br>
+        {% for cat in row.category.all %}
+            {{cat.title}}<br>
+        {% endfor %}
     {% endfor %}
 </div>
+<div>
+    <h3>Category</h3>
+    {% for cats in categories %}
+    <h4>{{cats.title}}</h4>
+        {% for cat in cats.posts_set.all %}
+            {{cat}}
+        {% endfor %}
+    {% endfor %}
+</div>
+
 {% endblock %}
